@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: air-web-pod
+  labels:
+    name: air-web-pod
+    tier: front-end
+spec:
+  containers:
+    - name: air-web-pod
+      image: kaushikarvind/air
+      command: ["airflow"]
+      args: ["webserver"]
+      ports:
+      - containerPort: 8080
+      volumeMounts:
+      - mountPath: /home/airflow
+        name: data-volume
+  volumes:
+  - name: data-volume
+    hostPath: 
+      path: /home/airflow
+      type: Directory
